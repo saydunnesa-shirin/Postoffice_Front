@@ -1,0 +1,31 @@
+﻿<h1>Shipments</h1>
+<a routerLink="add" class="btn btn-sm btn-success mb-2">Add Shipment</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th style="width: 30%">Shipment Number</th>
+            <th style="width: 30%">Flight Number</th>
+            <th style="width: 30%">Flight Date</th>
+            <th style="width: 10%"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let shipment of shipments">
+            <td>{{shipment.shipmentNumber}}</td>
+            <td>{{shipment.flightNumber}}</td>
+            <td>{{shipment.flightDate}}</td>
+            <td style="white-space: nowrap">
+                <a routerLink="edit/{{shipment.shipmentId}}" class="btn btn-sm btn-primary mr-1">Edit</a>
+                <button (click)="deleteUser(shipment.shipmentId)" class="btn btn-sm btn-danger btn-delete-shipment" [disabled]="shipment.isDeleting">
+                    <span *ngIf="shipment.isDeleting" class="spinner-border spinner-border-sm"></span>
+                    <span *ngIf="!shipment.isDeleting">Delete</span>
+                </button>
+            </td>
+        </tr>
+        <tr *ngIf="!shipments">
+            <td colspan="4" class="text-center">
+                <span class="spinner-border spinner-border-lg align-center"></span>
+            </td>
+        </tr>
+    </tbody>
+</table>
